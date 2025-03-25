@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magari Poa Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Box Icons Links -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>Car Marketplace</h1>
+        <button id="darkModeBtn">Toggle Dark Mode</button>
+    </header>
+
+    <div class="search-filters">
+        <input type="text" id="search" placeholder="Search by name or location...">
+        <input type="number" id="price" placeholder="Max Price">
+    </div>
+
+    <div id="car-container"></div>
+
+    <h2>Sell Your Car</h2>
+    <form id="sellCarForm">
+        <input type="text" id="carName" placeholder="Car Name" required>
+        <input type="text" id="carType" placeholder="Car Type" required>
+        <input type="text" id="carLocation" placeholder="Location" required>
+        <input type="number" id="carPrice" placeholder="Price" required>
+        <input type="url" id="carImage" placeholder="Image URL" required>
+        <button type="submit">Add Car</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
