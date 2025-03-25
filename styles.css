@@ -47,6 +47,15 @@ header{
 }
 #menu-icon{
     font-size: 24px;
-    
+    cursor: pointer;
+    color: var(--text-color);
+    display: none;
 }
-
+.logo{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.logo span{
+    color: var(--main-color);
+}
