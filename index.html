@@ -14,27 +14,40 @@
 </head>
 
 <body>
+
+    <!--navbar section-->
     <header>
-        <h1>Car Marketplace</h1>
-        <button id="darkModeBtn">Toggle Dark Mode</button>
+        <!--Container-->
+       <div class="nav">
+        <!--Menu icon add-->
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <!--Logo area-->
+        <a href="#" class="logo">Magari Poa</a>
+
+        <!--list-->
+        <ul class="navbar">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#cars">Cars</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#blog">Our Blog</a></li>
+        </ul>
+
+        <!--Search-->
+        <i class='bx bx-search' id="search-icon"></i>
+
+        <div class="search-box">
+            <input type="search" name="" id="" placeholder="search vehicle">
+        </div>
+        <!--div class="search-filters">
+                <input type="text" id="search" placeholder="Search by name or location...">
+                <input type="number" id="price" placeholder="Max Price">
+            </div>
+        
+            <div id="car-container"></div -->
+       </div>
     </header>
-
-    <div class="search-filters">
-        <input type="text" id="search" placeholder="Search by name or location...">
-        <input type="number" id="price" placeholder="Max Price">
-    </div>
-
-    <div id="car-container"></div>
-
-    <h2>Sell Your Car</h2>
-    <form id="sellCarForm">
-        <input type="text" id="carName" placeholder="Car Name" required>
-        <input type="text" id="carType" placeholder="Car Type" required>
-        <input type="text" id="carLocation" placeholder="Location" required>
-        <input type="number" id="carPrice" placeholder="Price" required>
-        <input type="url" id="carImage" placeholder="Image URL" required>
-        <button type="submit">Add Car</button>
-    </form>
 
     <script src="script.js"></script>
 </body>
