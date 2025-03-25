@@ -87,6 +87,10 @@ header{
     box-shadow: 4px 4px 20px rgb(15 54 55 /10%);
     border: 1px solid var(--main-color);
     border-radius: 0.5rem;
+    clip-path: circle(0% at 100% 0%);
+}
+.search-box.active{
+clip-path: circle(144% at 100% 0% );
 }
 .search-box input{
     width: 100%;
