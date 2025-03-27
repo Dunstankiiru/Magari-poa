@@ -25,36 +25,46 @@ document.addEventListener("DOMContentLoaded", () => {
             const carCard = document.createElement("div");
             carCard.classList.add("car-card");
 
+            // Check if the car is sold
+            const soldText = car.status === "sold" ? "<span class='sold'>SOLD</span>" : "";
+
             carCard.innerHTML = `
-                <img src="${car.image}" alt="${car.name}">
-                <h3>${car.name}</h3>
-                <p>Location: ${car.location}</p>
-                <p>Price: Ksh. ${car.price}</p>
-                <button class="buy-btn" data-id="${car.id}">Buy Now</button>
-            `;
+            <img src="${car.image}" alt="${car.name}">
+            <h3>${car.name} ${soldText}</h3>
+            <p>Location: ${car.location}</p>
+            <p>Price: Ksh. ${car.price}</p>
+            ${car.status !== "sold" ? `<button class="buy-btn" data-id="${car.id}">Buy Now</button>` : ""}
+        `;
 
             carContainer.appendChild(carCard);
         });
 
-
-        // Add event listener for "Buy Now" button
-        carCard.querySelector(".buy-btn").addEventListener("click", handleBuyCar);
+        // Add event listeners only to available cars
+        document.querySelectorAll(".buy-btn").forEach(button => {
+            button.addEventListener("click", handleBuyCar);
+        });
     }
+
 
     // Buy Car
     function handleBuyCar(event) {
         const carId = event.target.dataset.id;
 
         fetch(`${baseUrl}/${carId}`, {
-            method: "PATCH", // Use PATCH to update the car status
+            method: "PATCH", // Use PATCH to update only the status
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ status: "sold" })
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(updatedCar => {
-                alert(`Car with ID ${carId} has been marked as SOLD!`);
+                alert(`Car "${updatedCar.name}" has been marked as SOLD!`);
                 fetchCars(); // Refresh the car list
             })
             .catch(error => console.error("Error updating car status:", error));
