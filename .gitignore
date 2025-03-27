@@ -7,8 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const darkModeBtn = document.getElementById("darkModeBtn");
     const sellCarForm = document.getElementById("sellCarForm");
 
-    fetchCars();
+    let menu = document
 
+    fetchCars();
 
     // Fetch and display Cars
     function fetchCars() {
@@ -36,31 +37,48 @@ document.addEventListener("DOMContentLoaded", () => {
             carContainer.appendChild(carCard);
         });
 
-
-        // Add event listener for "Buy Now" button
-        carCard.querySelector(".buy-btn").addEventListener("click", handleBuyCar);
+        // Add event listeners for "Buy Now" buttons
+        document.querySelectorAll(".buy-btn").forEach(button => {
+            button.addEventListener("click", handleBuyCar);
+        });
     }
 
     // Buy Car
     function handleBuyCar(event) {
         const carId = event.target.dataset.id;
-
-        fetch(`${baseUrl}/${carId}`, {
-            method: "PATCH", // Use PATCH to update the car status
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ status: "sold" })
-        })
-            .then(response => response.json())
-            .then(updatedCar => {
-                alert(`Car with ID ${carId} has been marked as SOLD!`);
-                fetchCars(); // Refresh the car list
-            })
-            .catch(error => console.error("Error updating car status:", error));
+        alert(`Car with ID ${carId} has been purchased!`);
     }
 
+    // Filter Cars
+    function handleFilterCars() {
+        const searchText = searchInput.value.toLowerCase();
+        const maxPrice = priceInput.value;
 
+        fetch(baseUrl)
+            .then(response => response.json())
+            .then(cars => {
+                let filteredCars = cars.filter(car =>
+                    car.name.toLowerCase().includes(searchText) ||
+                    car.location.toLowerCase().includes(searchText)
+                );
+
+                if (maxPrice) {
+                    filteredCars = filteredCars.filter(car => car.price <= maxPrice);
+                }
+
+                displayCars(filteredCars);
+            })
+            .catch(error => console.error("Error filtering cars:", error));
+    }
+
+    // Event Listeners for Filtering
+    searchInput.addEventListener("input", handleFilterCars);
+    priceInput.addEventListener("input", handleFilterCars);
+
+    // Dark Mode Toggle
+    darkModeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
 
     // Handle Form Submission to Add a New Car
     sellCarForm.addEventListener("submit", event => {
@@ -91,9 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify(newCar)
             })
                 .then(response => response.json())
-                .then(addedCar => {
-                    addCarToDOM(addedCar); // Append new car instantly
-                    sellCarForm.reset(); // Clear form fields
+                .then(() => {
+                    fetchCars();
+                    sellCarForm.reset();
                 })
                 .catch(error => console.error("Error adding car:", error));
         };
@@ -101,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.readAsDataURL(carImage);
     });
 });
+
+
 
 
 
