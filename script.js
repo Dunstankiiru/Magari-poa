@@ -112,15 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
-
-
-
-
-
-
-
 let menu = document.querySelector('.navbar');
 
 let search = document.querySelector('.search-box');
