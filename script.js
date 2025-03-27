@@ -70,9 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Error updating car status:", error));
     }
 
-
-
-    // Handle Form Submission to Add a New Car
+  // Handle Form Submission to Add a New Car
     sellCarForm.addEventListener("submit", event => {
         event.preventDefault();
 
