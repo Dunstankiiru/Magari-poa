@@ -3,9 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const carContainer = document.getElementById("car-container");
     const searchInput = document.getElementById("search");
     const sellCarForm = document.getElementById("sellCarForm");
+    const searchButton = document.getElementById("search-button"); 
+
     let allCars = [];
 
-    fetchCars(); 
+    fetchCars();
 
     //  Fetch Cars 
     function fetchCars() {
@@ -31,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cars.forEach(car => {
             const carCard = document.createElement("div");
             carCard.classList.add("car-card");
-        
-             
+
+
             carCard.innerHTML = `
                 <img src="${car.image}" alt="${car.name}">
                 <h3>${car.name}</h3>
@@ -51,9 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
             carContainer.appendChild(carCard);
         });
 
-       
+
         document.querySelectorAll(".btn.btn-outline-success").forEach(button => {
-        button.addEventListener("click", handleBuyCar);
+            button.addEventListener("click", handleBuyCar);
         });
     }
 
@@ -130,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 driveMode: driveMode,
                 numberOfSeats: numberOfSeats,
                 previousOwners: previousOwners,
-                color: color 
+                color: color
             };
 
             fetch(baseUrl, {
@@ -156,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchButton.addEventListener("click", () => {
         const filter = searchInput.value.trim().toLowerCase();
+        console.log("Searching for:", filter); 
         const filteredCars = allCars.filter(car =>
             car.name.toLowerCase().includes(filter) ||
             car.location.toLowerCase().includes(filter)
@@ -163,6 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (filteredCars.length === 0) {
             alert("No matching cars found.");
+        } else {
+            c
         }
 
         displayCars(filteredCars);
@@ -176,13 +181,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // Navbar & Menu 
+
+    // ✅ Navbar & Menu 
     let menu = document.querySelector('.navbar');
     let searchBox = document.querySelector('.search-box');
 
     document.querySelector('#search-icon').addEventListener("click", () => {
         searchBox.classList.toggle('active');
         menu.classList.remove('active');
+        if (searchBox.classList.contains('active')) {
+            searchInput.focus(); // Focus on the search input when the box is active
+        }
+    });
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener("click", () => {
+            document.querySelectorAll('.navbar a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
     });
 
     document.querySelector('#menu-icon').addEventListener("click", () => {
@@ -190,16 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
         searchBox.classList.remove('active');
     });
 
-    window.addEventListener('scroll', () => {
-        document.querySelector('header').classList.toggle('shadow', window.scrollY > 0);
+});
+document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", function () {
+        document.querySelectorAll(".nav-link").forEach(item => item.classList.remove("active"));
+        this.classList.add("active");
     });
 });
+document.getElementById("sort-price").addEventListener("click", () => {
+    const sortedCars = [...allCars].sort((a, b) => a.price - b.price);
+    displayCars(sortedCars);
+});
 
-    document.querySelector('#menu-icon').addEventListener("click", () => {
-        menu.classList.toggle('active');
-        searchBox.classList.remove('active');
-    });
-
-    window.addEventListener('scroll', () => {
-        document.querySelector('header').classList.toggle('shadow', window.scrollY > 0);
-    });

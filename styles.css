@@ -114,11 +114,13 @@ header.shadow #search-icon {
     font-size: 24px;
     cursor: pointer;
     color: var(--bg-color);
+    position: relative;
+    z-index: 100;
 }
 
 .search-box {
     position: absolute;
-    top: 110%;
+    top: 100%; /* Adjusted to ensure visibility */
     right: 0;
     left: 0;
     background: var(--bg-color);
