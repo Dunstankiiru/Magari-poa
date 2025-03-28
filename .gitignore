@@ -7,16 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const darkModeBtn = document.getElementById("darkModeBtn");
     const sellCarForm = document.getElementById("sellCarForm");
 
-    let menu = document
-
     fetchCars();
+
 
     // Fetch and display Cars
     function fetchCars() {
         fetch(baseUrl)
             .then(response => response.json())
             .then(cars => displayCars(cars))
-            .catch(error => console.error("Error fetching cars:", error));
+            .catch(error => {
+                alert("Failed to fetch cars. Please try again later.");
+                console.error("Error fetching cars:", error);
+            });
     }
 
     // Display Car Listings
@@ -26,65 +28,67 @@ document.addEventListener("DOMContentLoaded", () => {
             const carCard = document.createElement("div");
             carCard.classList.add("car-card");
 
+            // Check if the car is sold
+            const soldText = car.status === "sold" ? "<span class='sold'>SOLD</span>" : "";
+
             carCard.innerHTML = `
-                <img src="${car.image}" alt="${car.name}">
-                <h3>${car.name}</h3>
-                <p>Location: ${car.location}</p>
-                <p>Price: Ksh. ${car.price}</p>
-                <button class="buy-btn" data-id="${car.id}">Buy Now</button>
-            `;
+            <img src="${car.image}" alt="${car.name}">
+            <h3>${car.name} ${soldText}</h3>
+            <h4>${car.type} ${soldText}</h4>
+            <p>Location: ${car.location}</p>
+            <p>Price: Ksh. ${car.price}</p>
+            ${car.status !== "sold" ? `<button class="buy-btn" data-id="${car.id}">Buy Now</button>` : ""}
+        `;
 
             carContainer.appendChild(carCard);
         });
 
-        // Add event listeners for "Buy Now" buttons
+        // Add event listeners only to available cars
         document.querySelectorAll(".buy-btn").forEach(button => {
             button.addEventListener("click", handleBuyCar);
         });
     }
 
+
     // Buy Car
     function handleBuyCar(event) {
         const carId = event.target.dataset.id;
-        alert(`Car with ID ${carId} has been purchased!`);
-    }
 
-    // Filter Cars
-    function handleFilterCars() {
-        const searchText = searchInput.value.toLowerCase();
-        const maxPrice = priceInput.value;
-
-        fetch(baseUrl)
-            .then(response => response.json())
-            .then(cars => {
-                let filteredCars = cars.filter(car =>
-                    car.name.toLowerCase().includes(searchText) ||
-                    car.location.toLowerCase().includes(searchText)
-                );
-
-                if (maxPrice) {
-                    filteredCars = filteredCars.filter(car => car.price <= maxPrice);
+        fetch(`${baseUrl}/${carId}`, {
+            method: "PATCH", // Use PATCH to update only the status
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ status: "sold" })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-
-                displayCars(filteredCars);
+                return response.json();
             })
-            .catch(error => console.error("Error filtering cars:", error));
+            .then(updatedCar => {
+                alert(`Car "${updatedCar.name}" has been marked as SOLD!`);
+                fetchCars(); // Refresh the car list
+            })
+            .catch(error => console.error("Error updating car status:", error));
     }
 
-    // Event Listeners for Filtering
-    searchInput.addEventListener("input", handleFilterCars);
-    priceInput.addEventListener("input", handleFilterCars);
-
-    // Dark Mode Toggle
-    darkModeBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-    });
-
-    // Handle Form Submission to Add a New Car
+  // Handle Form Submission to Add a New Car
     sellCarForm.addEventListener("submit", event => {
         event.preventDefault();
 
-        const carImage = document.getElementById("carImage").files[0];
+        const carImage = document.getElementById("carImage").files[0]; 
+        const carName = document.getElementById("carName").value;
+        const carType = document.getElementById("carType").value;
+        const carLocation = document.getElementById("carLocation").value;
+        const carPrice = document.getElementById("carPrice").value;
+
+        // Validate form inputs
+        if (!carName || !carType || !carLocation || !carPrice || !carImage) {
+            alert("Please fill in all fields and upload an image.");
+            return;
+        }
 
         if (!carImage) {
             alert("Please upload an image.");
@@ -109,27 +113,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify(newCar)
             })
                 .then(response => response.json())
-                .then(() => {
-                    fetchCars();
-                    sellCarForm.reset();
+                .then(addedCar => {
+                    addCarToDOM(addedCar); // Append new car instantly
+                    sellCarForm.reset(); // Clear form fields after adding a new car
                 })
-                .catch(error => console.error("Error adding car:", error));
+                .catch(error => {
+                    alert("Error adding car. Please try again later.");
+                    console.error("Error adding car:", error);
+                });
         };
 
         reader.readAsDataURL(carImage);
     });
 });
-
-
-
-
-
-
-
-
-
-
-
 
 let menu = document.querySelector('.navbar');
 
