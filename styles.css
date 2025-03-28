@@ -43,31 +43,6 @@ body {
     color: var(--text-color);
 }
 
-body.dark-mode .home-text h1 {
-    color: #ffffff; /* Ensure the heading is white for visibility */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional shadow for better contrast */
-}
-
-body.dark-mode .home-text p {
-    color: #e0e0e0; /* Light gray for paragraph text */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional shadow for better contrast */
-}
-
-body.dark-mode .home-text span {
-    color: #ffcc00; /* Bright color for highlighted text */
-}
-
-body.dark-mode {
-    background-color: #121212; /* Dark background for dark mode */
-    color: #ffffff; /* Light text color for dark mode */
-}
-
-body.dark-mode .home {
-    background-image: url(img/about.png); /* Change background image in dark mode */
-    background-size: 50%; /* Make the background image smaller */
-    background-position: right 20% center; /* Move the background image further to the right */
-}
-
 .container {
     max-width: 1068px;
     margin-left: auto;
@@ -130,8 +105,7 @@ header.shadow #search-icon {
     font-weight: 500;
 }
 
-.navbar a:hover,
-.navbar .active {
+.navbar a:hover{
     color: var(--main-color);
     border-bottom: 3px solid var(--main-color);
 }
@@ -199,22 +173,6 @@ header.shadow #search-icon {
     margin: 0.5rem 0 1.2rem;
 }
 
-.btn {
-    padding: 10px 22px;
-    background: var(--main-color);
-    color: var(--bg-color);
-    font-weight: 400;
-}
-
-.btn:hover {
-    background-color: darkmagenta;
-}
-
-.btn.dark-mode {
-    background: #333; /* Dark button background for dark mode */
-    color: #fff; /* Light text color for dark mode */
-}
-
 .heading {
     text-align: center;
 }
@@ -231,17 +189,15 @@ header.shadow #search-icon {
 
 .cars-wrapper {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: space-between; /* Space items evenly */
-    gap: 1rem; /* Space between items */
-    margin-top: 2rem; /* Space above the car images */
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 1rem; 
+    margin-top: 2rem; 
 }
 
 .cars-wrapper .box {
     flex: 1 1 calc(33.33% - 1rem);
-    /* Makes 3 images fit per row */
     max-width: calc(33.33% - 1rem);
-    /* Ensures responsiveness */
     position: relative;
     height: 180px;
     border-radius: 0.5rem;
@@ -250,11 +206,8 @@ header.shadow #search-icon {
 
 .cars-wrapper .box img {
     width: 100%;
-    /* Ensures the image fills the container */
     height: 100%;
-    /* Forces the image to maintain height */
     object-fit: cover;
-    /* Ensures it scales correctly */
     border: 2px solid var(--main-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
@@ -262,31 +215,24 @@ header.shadow #search-icon {
 
 .cars-wrapper .box img:hover {
     transform: scale(1.05);
-    /* Small zoom effect */
 }
 
 .car-card img {
     width: 100%;
-    /* Ensures image fills the container */
     max-width: 300px;
-    /* Limits image width */
     height: auto;
-    /* Maintains aspect ratio */
     display: block;
-    /* Prevents extra spacing */
     margin: 0 auto;
-    /* Centers the image */
     border-radius: 10px;
-    /* Optional: Rounded corners */
 }
 
 #car-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center align items */
-    gap: 20px; /* Space between items */
+    justify-content: center; 
+    gap: 20px; 
     max-width: 1200px;
-    margin: 2rem auto; /* Add margin to move the container lower */
+    margin: 2rem auto;
 }
 
 .car-card {
@@ -302,31 +248,31 @@ header.shadow #search-icon {
 
 .cars-container {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping to fit images in a row */
-    justify-content: space-between; /* Ensure items are spaced evenly */
-    gap: 1rem; /* Reduced gap for tighter layout */
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 1rem;
     margin-top: 2rem;
 }
 
 .cars-container .box {
-    flex: 1 1 10rem; /* Further reduced width to fit more images in a row */
+    flex: 1 1 10rem; 
     position: relative;
-    height: 180px; /* Slightly reduced height */
+    height: 180px; 
     border-radius: 0.5rem;
     overflow: hidden;
 }
 
 .cars-container .box img {
-    max-width: 100%; /* Ensure the image does not exceed the container width */
-    max-height: 140px; /* Set a maximum height for the image to match blog images */
-    object-fit: cover; /* Maintain aspect ratio */
-    border: 2px solid var(--main-color); /* Add border to images */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-    transition: transform 0.3s; /* Smooth transition for hover effect */
+    max-width: 100%; 
+    max-height: 140px; 
+    object-fit: cover; 
+    border: 2px solid var(--main-color); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s; 
 }
 
 .cars-container .box img:hover {
-    transform: scale(1.05); /* Scale effect on hover */
+    transform: scale(1.05); 
 }
 
 .cars-container .box h2 {
@@ -335,11 +281,10 @@ header.shadow #search-icon {
     left: 1rem;
     font-weight: 400;
     font-size: 1rem;
-    background: #1e1e1e; /* Updated background color for better contrast */
+    background: #1e1e1e; 
     padding: 8px;
     border-radius: 0.5rem;
-    color: #ffffff; /* Ensured text color is white for visibility in dark mode */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Added shadow for better contrast */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
 }
 
 .cars-container .box:hover h2 {
@@ -379,11 +324,6 @@ header.shadow #search-icon {
 .footer {
     background: var(--text-color);
     color: #f6f6f6;
-}
-
-.footer.dark-mode {
-    background: #020102; 
-    color: #f6f6f6; 
 }
 
 .footer-container {
@@ -505,15 +445,10 @@ header.shadow #search-icon {
         padding: 15px;
     }
 
-    .navbar a:hover,
-    .navbar a:active {
+    .navbar a:hover{
         border-bottom: none;
         background: var(--main-color);
         color: var(--bg-color);
-    }
-
-    .navbar.active {
-        clip-path: circle(144% at 0% 0%);
     }
 
     .blog-container .box {

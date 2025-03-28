@@ -7,64 +7,34 @@
     <title>Magari Poa Marketplace</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-
-    <!-- Box Icons Links -->
-     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-
 </head>
 
 <body>
-
-    <!--navbar section-->
     <header>
-        <!--Container-->
         <div class="nav">
-            <!--Menu icon add-->
             <i class='bx bx-menu' id="menu-icon"></i>
-
-            <!--Logo area-->
             <a href="#" class="logo">Magari<span>Poa</span></a>
-
-            <!--list-->
             <ul class="navbar">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#cars" class="active">Cars</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
-
-            <!--Search-->
             <i class='bx bx-search' id="search-icon"></i>
-
-<div class="search-box">
-    <input type="text" id="search" placeholder="Search by name or location...">
-    <input type="number" id="price" placeholder="Max Price">
-    <button id="search-button">Search</button>
-</div>
-
-            <div id="dark-container">
-                <i class='bx bxs-moon' id="darkModeBtn"></i>
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search by name or location...">
+                <button id="search-button" class="btn btn-outline-success">Search</button>
             </div>
         </div>
     </header>
 
-    <!--Home section-->
     <section class="home" id="home">
         <div class="home-text">
             <h1> We Have Everything <br> Your <span>Car</span> Need</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur <br>adipiscing elit, sed do eiusmod tempor<br>incididunt ut
-                labore et dolore magna<br> aliqua. Ut enim ad minim veniam, <br>quis nostrud exercitation ullamco
-                laboris<br>nisi ut aliquip ex ea commodo consequat.<br> Duis aute irure dolor in reprehenderit in
-                <br>voluptate velit esse cillum dolore eu fugiat <br>nulla pariatur. Excepteur sint occaecat
-                cupidatat<br> non proident, sunt in culpa qui <br>officia deserunt mollit anim id est laborum.</p>
-
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
             <a href="#" class="btn btn-outline-primary">Discover Now</a>
         </div>
     </section>
-
-    <!--Car section-->
 
     <section class="cars" id="cars">
         <div class="heading" id="sellCarForm">
@@ -82,19 +52,30 @@
                     <input type="number" class="form-control" id="carPrice" placeholder="Price" required>
                 </div>
                 <div class="form-group">
-                    <input type="file" class="form-control" id="carImage" accept="image/*" placeholder="Add Image"
-                    required>
+                    <input type="file" class="form-control" id="carImage" accept="image/*" placeholder="Add Image" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="engineRating" placeholder="Engine Rating (cc)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="driveMode" placeholder="Drive Mode" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="numberOfSeats" placeholder="Number of Seats" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="previousOwners" placeholder="Previous Owners" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="carColor" placeholder="Car Color" required>
                 </div>
                 <button type="submit" class="btn btn-outline-danger">Add Car</button>
             </form>
         </div>
-        <!--Container cars-->
 
-        <div id="car-container" class="cars-wrapper"> <!-- New wrapper for cars -->
-        </div> <!-- Closing the cars-wrapper -->
+        <div id="car-container" class="cars-wrapper"></div>
     </section>
 
-    <!--About section-->
     <section class="about container" id="about">
         <div class="about-img">
             <img src="img/about.png" alt="">
@@ -102,14 +83,11 @@
         <div class="about-text">
             <h1><span>About us</span></h1>
             <h2>Cheap Prices and <br> Quality Cars</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, debitis sequi. Quibusdam aperiam sequi
-                voluptas reiciendis praesentium, eveniet est fugiat, mollitia officia ab dolor, nemo architecto alias
-                amet natus quia?</p>
-
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit...</p>
             <a href="#" class="btn btn-outline-info">Learn More</a>
         </div>
     </section>
-    <!--Footer Section-->
+
     <section class="footer">
         <div class="footer-container container">
             <div class="footer-box">
@@ -141,11 +119,10 @@
         </div>
     </section>
 
-    <!--Copyright Section-->
     <div class="copyright">
         <p>&#169; Magari poa All Rights Reserved</p>
     </div>
 
     <script src="script.js"></script>
-
+</body>
 </html>
