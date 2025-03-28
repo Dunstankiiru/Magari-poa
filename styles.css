@@ -335,10 +335,10 @@ header.shadow #search-icon {
     left: 1rem;
     font-weight: 400;
     font-size: 1rem;
-    background: var(--bg-color);
+    background: #1e1e1e; /* Updated background color for better contrast */
     padding: 8px;
     border-radius: 0.5rem;
-    color: #ffffff; /* Updated color for visibility in dark mode */
+    color: #ffffff; /* Ensured text color is white for visibility in dark mode */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Added shadow for better contrast */
 }
 
