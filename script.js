@@ -178,7 +178,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const sortPriceButton = document.getElementById("sort-price");
 
+    if (!sortPriceButton) {
+        console.error("Error: Sort Price button not found.");
+        return;
+    }
+
+    sortPriceButton.addEventListener("click", () => {
+        const sortedCars = [...allCars].sort((a, b) => Number(a.price) - Number(b.price));
+        displayCars(sortedCars);
+    });
+});
 
     // ✅ Navbar & Menu 
     let menu = document.querySelector('.navbar');
@@ -204,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
         searchBox.classList.remove('active');
     });
 
-});
 document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", function () {
         document.querySelectorAll(".nav-link").forEach(item => item.classList.remove("active"));
@@ -212,7 +222,6 @@ document.querySelectorAll(".nav-link").forEach(link => {
     });
 });
 document.getElementById("sort-price").addEventListener("click", () => {
-    const sortedCars = [...allCars].sort((a, b) => a.price - b.price);
+    const sortedCars = [...allCars].sort((a, b) => Number(a.price) - Number(b.price));
     displayCars(sortedCars);
 });
-
