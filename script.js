@@ -166,8 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (filteredCars.length === 0) {
             alert("No matching cars found.");
-        } else {
-            c
         }
 
         displayCars(filteredCars);
