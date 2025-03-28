@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const baseUrl = "https://magari-poa-backend.onrender.com/api/cars";
     const carContainer = document.getElementById("car-container");
     const searchInput = document.getElementById("search");
-    const priceInput = document.getElementById("carPrice"); // Update to reference the correct price input
-    const darkModeBtn = document.getElementById("darkModeBtn"); // Dark mode button
+    const priceInput = document.getElementById("carPrice");
+    const darkModeBtn = document.getElementById("darkModeBtn"); 
     darkModeBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode"); // Toggle dark mode class
+        document.body.classList.toggle("dark-mode"); 
     });
     const sellCarForm = document.getElementById("sellCarForm");
 
@@ -15,11 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function fetchCars() {
         fetch(baseUrl)
             .then(response => response.json())
-            .then(cars => displayCars(cars))
-            .catch(error => {
-                alert("Failed to fetch cars. Please try again later.");
-                console.error("Error fetching cars:", error);
-            });
+            .then(cars => displayCars(cars));
+
     }
 
     // Display Car Listings
@@ -29,13 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const carCard = document.createElement("div");
             carCard.classList.add("car-card");
 
-            // Check if the car is sold
             const soldText = car.status === "sold" ? "<span class='sold'>SOLD</span>" : "";
 
             carCard.innerHTML = `
             <img src="${car.image}" alt="${car.name}">
-            <h3>${car.name} ${soldText}</h3>
-            <h4>${car.type} ${soldText}</h4>
+            <h3>${car.name}</h3>
+            <h4>${car.type}</h4>
+            <h2>${soldText}</h2>
             <p>Location: ${car.location}</p>
             <p>Price: Ksh. ${car.price}</p>
             ${car.status !== "sold" ? `<button class="buy-btn" data-id="${car.id}">Buy Now</button>` : ""}
@@ -44,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             carContainer.appendChild(carCard);
         });
 
-        // Add event listeners only to available cars
+      
         document.querySelectorAll(".buy-btn").forEach(button => {
             button.addEventListener("click", handleBuyCar);
         });
@@ -55,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const carId = event.target.dataset.id;
 
         fetch(`${baseUrl}/${carId}`, {
-            method: "PATCH", // Use PATCH to update only the status
+            method: "PATCH", 
             headers: {
                 "Content-Type": "application/json"
             },
@@ -69,12 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(updatedCar => {
                 alert(`Car "${updatedCar.name}" has been marked as SOLD!`);
-                fetchCars(); // Refresh the car list
+                fetchCars(); 
             })
-            .catch(error => console.error("Error updating car status:", error));
     }
 
-    // Handle Form Submission to Add a New Car
+    // Form Submission to Add a New Car
     sellCarForm.addEventListener("submit", event => {
         event.preventDefault();
 
@@ -82,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const carName = document.getElementById("carName").value;
         const carType = document.getElementById("carType").value;
         const carLocation = document.getElementById("carLocation").value;
-        const carPrice = priceInput.value; // Use the updated price input reference
+        const carPrice = priceInput.value; 
 
         // Validate form inputs
         if (!carName || !carType || !carLocation || !carPrice || !carImage) {
@@ -97,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: carType,
                 location: carLocation,
                 price: carPrice,
-                image: e.target.result // Use base64 image URL
+                image: e.target.result 
             };
 
             fetch(baseUrl, {
@@ -109,12 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
             })
                 .then(response => response.json())
                 .then(() => {
-                    addCarToDOM(newCar); // Append new car instantly
-                    sellCarForm.reset(); // Clear form fields after adding a new car
-                })
-                .catch(error => {
-                    alert("Error adding car. Please try again later.");
-                    console.error("Error adding car:", error);
+                    addCarToDOM(newCar); 
+                    sellCarForm.reset(); 
                 });
         };
 
@@ -122,32 +114,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Search functionality
-    searchInput.addEventListener("input", () => {
+    document.getElementById("search-button").addEventListener("click", () => {
         const filter = searchInput.value.toLowerCase();
-        const carCards = document.querySelectorAll(".car-card");
-        carCards.forEach(card => {
-            const carName = card.querySelector("h3").textContent.toLowerCase();
-            if (carName.includes(filter)) {
-                card.style.display = "";
-            } else {
-                card.style.display = "none";
-            }
+        fetchCars().then(cars => {
+            const filteredCars = cars.filter(car => car.name.toLowerCase().includes(filter));
+            displayCars(filteredCars);
         });
     });
-});
 
+   
+    const filteredCars = cars.filter(car => car.name.toLowerCase().includes(filter));
+    displayCars(filteredCars);
+
+    });
 let menu = document.querySelector('.navbar');
 
 let search = document.querySelector('.search-box');
 
 document.querySelector('#search-icon').onclick = () => {
-    updateActiveNavbar('home'); // Update active navbar on search icon click
+    updateActiveNavbar('home'); 
     search.classList.toggle('active');
     menu.classList.remove('active');
 }
 
 document.querySelector('#menu-icon').onclick = () => {
-    updateActiveNavbar('menu'); // Update active navbar on menu icon click
+    updateActiveNavbar('menu'); 
     menu.classList.toggle('active');
     search.classList.remove('active');
 }
@@ -163,9 +154,9 @@ let header = document.querySelector('header');
 function updateActiveNavbar(section) {
     const navbarLinks = document.querySelectorAll('.navbar a');
     navbarLinks.forEach(link => {
-        link.classList.remove('active'); // Remove active class from all links
+        link.classList.remove('active'); 
         if (link.getAttribute('href') === `#${section}`) {
-            link.classList.add('active'); // Add active class to the current section link
+            link.classList.add('active'); 
         }
     });
 }
@@ -177,7 +168,7 @@ window.addEventListener('scroll', () => {
         const sectionTop = section.getBoundingClientRect().top;
         const sectionHeight = section.offsetHeight;
         if (sectionTop >= 0 && sectionTop < window.innerHeight / 2) {
-            updateActiveNavbar(section.id); // Update active navbar based on scroll position
+            updateActiveNavbar(section.id); 
         }
     });
     header.classList.toggle('shadow', window.scrollY > 0);
