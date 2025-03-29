@@ -179,6 +179,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please enter a search term.");
                 return;
             }
+            
+            if (allCars.length === 0) {
+                alert("No cars available to search. Please try again later.");
+                return;
+            }
 
             const filteredCars = allCars.filter(car =>
                 car.name.toLowerCase().includes(filter) ||
