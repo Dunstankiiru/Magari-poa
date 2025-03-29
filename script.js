@@ -92,9 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 console.error("Error: carId element not found in the car-card.");
             }
-        } else {
-            console.error("Error: car-card element not found.");
-        }
+        } 
     }
     // Add New Car to DOM
     function addCarToDOM(newCar) {
@@ -179,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please enter a search term.");
                 return;
             }
-            
+
             if (allCars.length === 0) {
                 alert("No cars available to search. Please try again later.");
                 return;
