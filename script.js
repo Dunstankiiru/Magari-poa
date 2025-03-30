@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong>Seats:</strong> ${newCar.numberOfSeats}</p>
             <p><strong>Previous Owners:</strong> ${newCar.previousOwners}</p>
             <p><strong>Color:</strong> ${newCar.color}</p>
-            <button class="btn btn-outline-success" data-id="${car.id}">Buy Now</button>
+            <button class="btn btn-outline-success" data-id="${newCar.id}">Buy Now</button>
         `;
 
         carContainer.appendChild(carCard);
