@@ -161,9 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(response => {
                     addCarToDOM(response);
-                    sellCarForm.reset();
+                    alert("Car added successfully!");
                     document.getElementById("carImage").value = "";
                 })
+
                 .catch(error => console.error("Error adding car:", error));
         };
 
@@ -191,6 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             displayCars(filteredCars);
 
+            sellCarForm.style.display = "none";
+
             if (filteredCars.length === 0) {
                 alert("No matching cars found.");
             }
@@ -206,11 +209,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sorting by price
     const sortPriceButton = document.getElementById("sort-price");
+    let isAscending = true;
 
     if (sortPriceButton) {
         sortPriceButton.addEventListener("click", () => {
-            const sortedCars = [...allCars].sort((a, b) => Number(a.price) - Number(b.price));
+            let sortedCars = [...allCars]; 
+
+            if (isAscending) {
+                sortedCars.sort((a, b) => a.price - b.price); 
+                sortPriceButton.textContent = "Sort by Price: High to Low";
+            } else {
+                sortedCars.sort((a, b) => b.price - a.price); 
+                sortPriceButton.textContent = "Sort by Price: Low to High";
+            }
+
+            isAscending = !isAscending; 
             displayCars(sortedCars);
+
+            sellCarForm.style.display = "none";
         });
     }
 });
