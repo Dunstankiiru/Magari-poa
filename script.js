@@ -110,9 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong>Seats:</strong> ${newCar.numberOfSeats}</p>
             <p><strong>Previous Owners:</strong> ${newCar.previousOwners}</p>
             <p><strong>Color:</strong> ${newCar.color}</p>
-            <h2>${newCar.status === "sold" ? "<span class='sold'>SOLD</span>" : ""}</h2>
-            ${newCar.status !== "sold" ? `<button class="btn btn-outline-success" data-id="${newCar.id}">Buy Now</button>` : ""}
-            <p class="car-id" style="display:none;">${newCar.id}</p>
+            <button class="btn btn-outline-success" data-id="${car.id}">Buy Now</button>
         `;
 
         carContainer.appendChild(carCard);
